@@ -4,6 +4,9 @@ import axios from "axios";
 
 import placeholderImage from "../assets/image-12.png";
 
+// Define the base URL for your API, same as in the other files
+const API_BASE_URL = "https://hirani-constructions-api.onrender.com";
+
 // The component receives all functions from App.jsx
 function ProjectGallery({
   projects,
@@ -60,8 +63,9 @@ function ProjectGallery({
         location: editFormData.location,
         budget: Number(editFormData.budget),
       };
+      // Use the full URL to your deployed backend
       const response = await axios.put(
-        `/api/projects/${projectId}`,
+        `${API_BASE_URL}/api/projects/${projectId}`, // <-- CHANGED
         updatedData
       );
 
@@ -186,7 +190,7 @@ function ProjectGallery({
         <div className="absolute inset-0 flex items-center justify-between z-10 px-0 md:px-2 pointer-events-none">
           <button
             onClick={scrollLeft}
-            className="bg-white/80 rounded-full shadow-md p-2 hover:bg-white transition pointer-events-auto"
+            className="bg-.white/80 rounded-full shadow-md p-2 hover:bg-white transition pointer-events-auto"
             aria-label="Scroll Left"
           >
             <ChevronLeft size={28} className="text-gray-700" />

@@ -10,6 +10,9 @@ import ServicesSection from "./components/ServicesSection";
 import ClientsSection from "./components/ClientsSection";
 import NewProjectForm from "./components/NewProjectForm"; // <-- NEW: Import the form
 
+// Define the base URL for your API
+const API_BASE_URL = "https://hirani-constructions-api.onrender.com";
+
 function App() {
   const [projects, setProjects] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -29,7 +32,8 @@ function App() {
     // This is your original code to fetch projects. It runs right after the login check.
     const fetchProjects = async () => {
       try {
-        const response = await axios.get("/api/projects");
+        // Use the full URL to your deployed backend
+        const response = await axios.get(`${API_BASE_URL}/api/projects`); // <-- CHANGED
         setProjects(response.data);
         setIsLoading(false);
       } catch (err) {
@@ -56,8 +60,8 @@ function App() {
     // Ask the user to confirm before deleting
     if (window.confirm("Are you sure you want to delete this project?")) {
       try {
-        // Use axios to send a DELETE request to our backend
-        await axios.delete(`/api/projects/${projectId}`);
+        // Use the full URL to your deployed backend
+        await axios.delete(`${API_BASE_URL}/api/projects/${projectId}`); // <-- CHANGED
 
         // If the deletion was successful, update our frontend list
         // by filtering out the project with the matching ID.

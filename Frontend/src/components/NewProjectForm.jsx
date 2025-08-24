@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+// Define the base URL for your API, same as in App.jsx
+const API_BASE_URL = "https://hirani-constructions-api.onrender.com";
+
 // This component receives a function 'onProjectAdded' from App.jsx
 function NewProjectForm({ onProjectAdded }) {
   // Create state "boxes" to hold the form data
@@ -22,8 +25,11 @@ function NewProjectForm({ onProjectAdded }) {
         budget: Number(budget), // Make sure budget is a number
       };
 
-      // Use axios to send a POST request to our backend
-      const response = await axios.post("/api/projects", newProject);
+      // Use axios to send a POST request to our deployed backend
+      const response = await axios.post(
+        `${API_BASE_URL}/api/projects`,
+        newProject
+      ); // <-- CHANGED
 
       // Tell the main App component that a new project was added
       onProjectAdded(response.data);
